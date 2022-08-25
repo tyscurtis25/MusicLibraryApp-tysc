@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Music Database">
+    <meta name="keywords" content="Phozogy, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Music Library</title>
+
+    <!-- Google Font -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Muli" />
+    <link href='https://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet'>
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <script>
+        /*** Ask Mercy Question before deleting a song ***/
+        function safeDelete(deleteSong) {
+            console.log("passed to safeDelete: " + deleteSong);
+            let yesNo = confirm("Are you sure?");
+            if (yesNo === true) {
+                console.log("submitting delete: " + deleteSong);
+                document.forms[deleteSong].submit();
+            }
+        }
+        
+    </script>
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Hero Section Begin -->
+    <section class="hero-section">
+        <div class="hs-slider owl-carousel">
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hs-text">
+                                <h1>Music Library</h1>
+                                <p>View our Music Library. Add Your Own Music. Fix Existing Entries.</p>
+                                <a href="#music-database" class="primary-btn">View Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hs-text">
+                                <h1>Music Library</h1>
+                                <p>View our Music Library. Add Your Own Music. Fix Existing Entries.</p>
+                                <a href="#music-database" class="primary-btn">View Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- About Section Begin -->
+    <section class="services-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="services-item">
+                        <img src="img/services/record.jpg" alt="">
+                        <h3 id="music-database">View</h3>
+                        <p>See the awesome list of music that we have!</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="services-item">
+                        <img src="img/services/face-palm.jpg" alt="">
+                        <h3>Edit</h3>
+                        <p>See a mistake in one of our entries? No need to tell us, fix it yourself!</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="services-item">
+                        <img src="img/services/typing.jpg" alt="">
+                        <h3>Create</h3>
+                        <p>Feel like something is missing from our music library? Feel free to add to it!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Section End -->
+
+    <!-- Music Database Section Begin -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="section-title">
+                        <h2>Music Database</h2>
+                        <p>View our extensive list of music and make the changes that you like.</p>
+
+                        <h1>Song Directory</h1>
+        <% {console.log("Listing songs from index.ejs: " + arrayName.length);} %>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                    <!--add song form-->
+                    <form action="/addsong" method="GET">
+                       <input type="submit" value="Add New Record">
+                    </form>
+                    </th>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Release Year</th>
+                </tr>
+            </thead>
+            <br>
+            <tbody>
+                <!-- EJS loop to create a table row for each song -->
+                <% for(var i=0;i<arrayName.length;i++) { %>
+                    <tr>
+                        <td>
+                            <!-- Add a from and button on each row to delete the song -->
+                            <form action="/delSong/<%= arrayName[i].id %>" method="POST" 
+                                id="delSong<%= arrayName[i].id %>" 
+                                name="delSong<%= arrayName[i].id %>">
+                                <input type="button" name="Delete" value="Delete" onclick="safeDelete('delSong<%= arrayName[i].id %>')">
+                            </form>
+                        </td>
+                        <td><%= arrayName[i].title %></td>
+                        <td><%= arrayName[i].artist %></td>
+                        <td><%= arrayName[i].releaseYear %></td>
+                        <td>
+                            <!-- Add a form and button on each row to edit the song-->
+                            <form action="/editsong/ <%= arrayName[i].id %>" 
+                                method="get" id="editsong" name="editsong">
+                                <input type="submit" value="Edit" name="Edit">
+                            </form>
+                        </td>
+                    </tr>
+                <%}%>
+            </tbody>
+        </table>
+
+        <br>
+        
+        <form action="/startOver/"" method="POST" 
+            id="startOver" 
+            name="startOver">
+            <input type="button" name="Delete" value="Start Over" onclick="safeDelete('startOver')">
+        </form>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- Music Database Section End -->
+
+    <!-- Team Section Begin -->
+    <section class="team-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="section-title">
+                        <h2>Our team</h2>
+                        <p>Meet the members of Team 2 - the creators of this amazing program!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="team-item">
+                        <img src="img/team/layton_barney.jpg" alt="">
+                        <div class="ti-text">
+                            <h5>Layton Barney</h5>
+                            <span>Classical</span>
+                            <div class="ti-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="team-item">
+                        <img src="img/team/tyler_curtis.jpg" alt="">
+                        <div class="ti-text">
+                            <h5>Tyler Curtis</h5>
+                            <span>Alternative</span>
+                            <div class="ti-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="team-item">
+                        <img src="img/team/emma_gardner.png" alt="">
+                        <div class="ti-text">
+                            <h5>Emma Gardner</h5>
+                            <span>Alernative Rock/Country</span>
+                            <div class="ti-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="team-item">
+                        <img src="img/team/jess_hansen.jpg" alt="">
+                        <div class="ti-text">
+                            <h5>Jess Hansen</h5>
+                            <span>Alternative Rock</span>
+                            <div class="ti-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Favorite Artists Section Begin -->
+    <section class="portfolio-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Our Favorite Artists</h2>
+                    </div>
+                    <div class="filter-controls">
+                        <ul>
+                            <li class="active" data-filter="*">All</li>
+                            <li data-filter=".alternative">Alternative</li>
+                            <li data-filter=".country">Country</li>
+                            <li data-filter=".pop">Pop</li>
+                            <li data-filter=".rap">Rap</li>
+                            <li data-filter=".rock">Rock</li>
+                            <li data-filter=".indie">Indie</li>
+                            <li data-filter=".classic">Classic</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 p-0">
+                    <div class="portfolio-filter">
+                        <div class="pf-item set-bg alternative" data-setbg="img/portfolio/fall-out-boy.jpg">
+                            <a href="img/portfolio/fall-out-boy.jpg" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>Fall Out Boy</h4>
+                                <span>Alternative</span>
+                            </div>
+                        </div>
+                        <div class="pf-item large-width large-height set-bg country"
+                            data-setbg="img/portfolio/zac-brown-band.jpg">
+                            <a href="img/portfolio/zac-brown-band.jpg" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>Zac Brown Band</h4>
+                                <span>Country</span>
+                            </div>
+                        </div>
+                        <div class="pf-item large-width set-bg rap" data-setbg="img/portfolio/nf.jpg">
+                            <a href="img/portfolio/nf.jpg" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>NF</h4>
+                                <span>Rap</span>
+                            </div>
+                        </div>
+                        <div class="pf-item large-height set-bg rock" data-setbg="img/portfolio/queen.jpg">
+                            <a href="img/portfolio/queen.jpg" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>Queen</h4>
+                                <span>Rock</span>
+                            </div>
+                        </div>
+                        <div class="pf-item set-bg alternative" data-setbg="img/portfolio/all-american-rejects.jpg">
+                            <a href="img/portfolio/all-american-rejects.jpg" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>All American Rejects</h4>
+                                <span>Alternative</span>
+                            </div>
+                        </div>
+                        <div class="pf-item set-bg alternative" data-setbg="img/portfolio/coldplay.png">
+                            <a href="img/portfolio/coldplay.png" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>Coldplay</h4>
+                                <span>Alternative</span>
+                            </div>
+                        </div>
+                        <div class="pf-item set-bg indie" data-setbg="img/portfolio/syml.jpg">
+                            <a href="img/portfolio/syml.jpg" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>SYML</h4>
+                                <span>Indie</span>
+                            </div>
+                        </div>
+                        <div class="pf-item set-bg alternative" data-setbg="img/portfolio/walkthemoon.jpg">
+                            <a href="img/portfolio/walkthemoon.jpg" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>WALK THE MOON</h4>
+                                <span>Alternative</span>
+                            </div>
+                        </div>
+                        <div class="pf-item large-width set-bg pop" data-setbg="img/portfolio/katy-perry.jpg">
+                            <a href="img/portfolio/katy-perry.jpgg" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>Katy Perry</h4>
+                                <span>Pop</span>
+                            </div>
+                        </div>
+                        <div class="pf-item set-bg alternative" data-setbg="img/portfolio/panic.jpg">
+                            <a href="img/portfolio/panic.jpg" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>Panic! at the Disco</h4>
+                                <span>Alternative</span>
+                            </div>
+                        </div>
+                        <div class="pf-item large-width large-height set-bg classic"
+                            data-setbg="img/portfolio/bach.jpg">
+                            <a href="img/portfolio/bach.jpg" class="pf-icon image-popup"><span class="icon_plus"></span></a>
+                            <div class="pf-text">
+                                <h4>Bach</h4>
+                                <span>Classical</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Favorite Artists Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="fs-about">
+                        <div class="fa-logo">
+                            <a href="#">
+                                <img src="img/f-logo.png" alt="">
+                            </a>
+                        </div>
+                        <p>Thank you Professor Hilton & the TAs for the great semester!</p>
+                        <div class="fa-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="fs-widget">
+                        <h5>Instagram</h5>
+                        <div class="fw-instagram">
+                            <img src="img/portfolio/coldplay.png" alt="">
+                            <img src="img/portfolio/fall-out-boy.jpg" alt="">
+                            <img src="img/portfolio/all-american-rejects.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="fs-widget">
+                        <h5>Quick links</h5>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Gallery</a></li>
+                            <li><a href="#">Portfolio</a></li>
+                            <li><a href="#">Services</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="fs-widget">
+                        <h5>Subscribe</h5>
+                        <p>Get the latest updates on our music database by entering your email below.</p>
+                        <div class="fw-subscribe">
+                            <form action="#">
+                                <input type="text" placeholder="Email">
+                                <button type="submit"><i class="fa fa-send"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="copyright-text">
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart" aria-hidden="true"></i> by Team 2 - IS 303
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search model Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
+                    

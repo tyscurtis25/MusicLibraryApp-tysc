@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<!--This page will allow users to add new songs to the Database. 
+    Once saved, the page will be redirected to the main index.ejs page.-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Phozogy Template">
+    <meta name="keywords" content="Phozogy, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Music Library | Add Song</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Quantico:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Add Song Section Begin -->
+    <section class="about-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 p-0">
+                    <div class="about-pic set-bg" data-setbg="img/about/about-pic.jpg">
+                    </div>
+                </div>
+                <div class="col-lg-6 p-0">
+                    <div class="about-text">
+                        <div class="section-title">
+                            <h2>Add a Song!</h2>
+                            <p>Fill out the form below to add a song.
+                            </p>
+                            
+                            <!-- FORM BEGINS HERE -->
+                            <!--This is a series of labels that have each fields required in the db-->
+                            <form action="/addsong" method="POST">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label for="sTitle">Enter Song Title:</label>
+                                        </td>
+                                        <td>
+                                            <input id="sTitle" type="text" name="title">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="sArtist">Enter Song Artist:</label>
+                                        </td>
+                                        <td>
+                                            <input id="sArtist" type="text" name="artist">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="sYear">Enter the Year Song was Released:</label>
+                                        </td>
+                                        <td>
+                                            <input id="sYear" type="text" name="releaseYear">
+                                        </td>
+                                    </tr>
+                                    <br>
+                                </table>
+                                <input type="submit" value="Save">
+                            </form>
+                            <br>
+                            <form action="/index"><input type="submit" value="Cancel"></form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Add Song Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="fs-about">
+                        <div class="fa-logo">
+                            <a href="#">
+                                <img src="img/f-logo.png" alt="">
+                            </a>
+                        </div>
+                        <p>Thank you Professor Hilton & the TAs for the great semester!</p>
+                        <div class="fa-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="fs-widget">
+                        <h5>Instagram</h5>
+                        <div class="fw-instagram">
+                            <img src="img/portfolio/coldplay.png" alt="">
+                            <img src="img/portfolio/fall-out-boy.jpg" alt="">
+                            <img src="img/portfolio/all-american-rejects.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="fs-widget">
+                        <h5>Quick links</h5>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#">Gallery</a></li>
+                            <li><a href="#">Portfolio</a></li>
+                            <li><a href="#">Services</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="fs-widget">
+                        <h5>Subscribe</h5>
+                        <p>Get the latest updates on our music database by entering your email below.</p>
+                        <div class="fw-subscribe">
+                            <form action="#">
+                                <input type="text" placeholder="Email">
+                                <button type="submit"><i class="fa fa-send"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="copyright-text">
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart" aria-hidden="true"></i> by Team 2 - IS 303
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search model Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
